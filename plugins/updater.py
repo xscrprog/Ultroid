@@ -14,7 +14,8 @@ from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
 UPSTREAM_REPO_URL = "https://github.com/TeamUltroid/Ultroid"
 requirements_path = path.join(
-    path.dirname(path.dirname(path.dirname(__file__))), "requirements.txt"
+    path.dirname(path.dirname(path.dirname(__file__))),
+    "requirements.txt",
 )
 
 
@@ -105,7 +106,8 @@ async def upstream(ups):
                 remove("output.txt")
             else:
                 return await eod(
-                    pagal, f"{changelog_str}\n\nDo `{hndlr}update now` to update."
+                    pagal,
+                    f"{changelog_str}\n\nDo `{hndlr}update now` to update.",
                 )
         else:
             await eod(
@@ -142,12 +144,14 @@ async def upstream(ups):
             repo.__del__()
             return
         await eor(
-            pagal, "`Userbot dyno build in progress, please wait for it to complete.`"
+            pagal,
+            "`Userbot dyno build in progress, please wait for it to complete.`",
         )
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
         heroku_git_url = heroku_app.git_url.replace(
-            "https://", "https://api:" + Var.HEROKU_API + "@"
+            "https://",
+            "https://api:" + Var.HEROKU_API + "@",
         )
         if "heroku" in repo.remotes:
             remote = repo.remote("heroku")

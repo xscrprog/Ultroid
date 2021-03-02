@@ -27,5 +27,3 @@ jobs:
           repository: .
           commit_user_name: buddhhu
           commit_user_email: buddhhu@ultroid.tech
-
-

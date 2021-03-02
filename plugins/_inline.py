@@ -21,7 +21,7 @@ from telethon.tl.types import InputWebDocument
 from . import *
 
 # ================================================#
-notmine = "This bot is for {}".format(OWNER_NAME)
+notmine = f"This bot is for {OWNER_NAME}"
 ULTROID_PIC = "https://telegra.ph/file/11245cacbffe92e5d5b14.jpg"
 helps = """
 [Uʟᴛʀᴏɪᴅ Sᴜᴘᴘᴏʀᴛ](t.me/ultroidsupport)
@@ -58,7 +58,7 @@ Gᴏ Aɴᴅ Aᴅᴅ ADDONS Vᴀʀ Wɪᴛʜ Vᴀʟᴜᴇ Tʀᴜᴇ**
 async def e(o):
     if len(o.text) == 0:
         b = o.builder
-        uptime = grt((time.time() - start_time))
+        uptime = grt(time.time() - start_time)
         ALIVEMSG = """
 **The Ultroid Userbot...**\n
 ✵ **Owner** - `{}`
@@ -86,11 +86,12 @@ async def e(o):
                     [Button.url(text="Support Group", url="t.me/UltroidSupport")],
                     [
                         Button.url(
-                            text="Repo", url="https://github.com/Teamultroid/Ultroid"
-                        )
+                            text="Repo",
+                            url="https://github.com/Teamultroid/Ultroid",
+                        ),
                     ],
                 ],
-            )
+            ),
         ]
         await o.answer(res, switch_pm=f"👥 ULTROID PORTAL", switch_pm_param="start")
 
@@ -137,7 +138,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
                     [
                         Button.url("NekoBin", url=f"{link}"),
                         Button.url("Raw", url=f"{link_raw}"),
-                    ]
+                    ],
                 ],
             )
             await event.answer([result] if result else None)
@@ -168,7 +169,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
 
     @callback("upp")
     async def _(event):
-        uptime = grt((time.time() - start_time))
+        uptime = grt(time.time() - start_time)
         pin = f"🙋Uᴘᴛɪᴍᴇ = {uptime}"
         await event.answer(pin, cache_time=0, alert=True)
 
@@ -181,55 +182,55 @@ if Var.BOT_USERNAME is not None and asst is not None:
                     "Sᴇɴᴅ Oғғɪᴄɪᴀʟ Pʟᴜɢɪɴs",
                     query="send",
                     same_peer=True,
-                )
+                ),
             ],
             [
                 Button.switch_inline(
                     "Pʟᴀʏ Sᴛᴏʀᴇ Aᴘᴘs",
                     query="app telegram",
                     same_peer=True,
-                )
+                ),
             ],
             [
                 Button.switch_inline(
                     "Mᴏᴅᴅᴇᴅ Aᴘᴘs",
                     query="mods minecraft",
                     same_peer=True,
-                )
+                ),
             ],
             [
                 Button.switch_inline(
                     "Sᴇᴀʀᴄʜ Oɴ Gᴏᴏɢʟᴇ",
                     query="go TeamUltroid",
                     same_peer=True,
-                )
+                ),
             ],
             [
                 Button.switch_inline(
                     "Sᴇᴀʀᴄʜ Oɴ Yᴀʜᴏᴏ",
                     query="yahoo TeamUltroid",
                     same_peer=True,
-                )
+                ),
             ],
             [
                 Button.switch_inline(
                     "YᴏᴜTᴜʙᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ",
                     query="yt How to Deploy Ultroid Userbot",
                     same_peer=True,
-                )
+                ),
             ],
             [
                 Button.switch_inline(
                     "CʟɪᴘAʀᴛ Sᴇᴀʀᴄʜ",
                     query="clipart frog",
                     same_peer=True,
-                )
+                ),
             ],
             [
                 Button.inline(
                     "<- Bᴀᴄᴋ",
                     data="open",
-                )
+                ),
             ],
         ]
         await e.edit(buttons=button, link_preview=False)
@@ -361,7 +362,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
         except BaseException:
             pass
         if help_string == "":
-            reply_pop_up_alert = "{} has no detailed help...".format(plugin_name)
+            reply_pop_up_alert = f"{plugin_name} has no detailed help..."
         else:
             reply_pop_up_alert = help_string
         reply_pop_up_alert += "\n© @TheUltroid"
@@ -378,7 +379,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
                 reply_pop_up_alert = notmine
                 await event.answer(reply_pop_up_alert, cache_time=0)
         except BaseException:
-            halps = "Do .help {} to get the list of commands.".format(plugin_name)
+            halps = f"Do .help {plugin_name} to get the list of commands."
             await event.edit(halps)
 
     @callback(
@@ -412,7 +413,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
                 except BaseException:
                     pass
         if help_string == "":
-            reply_pop_up_alert = "{} has no detailed help...".format(plugin_name)
+            reply_pop_up_alert = f"{plugin_name} has no detailed help..."
         else:
             reply_pop_up_alert = help_string
         reply_pop_up_alert += "\n© @TheUltroid"
@@ -429,7 +430,7 @@ if Var.BOT_USERNAME is not None and asst is not None:
                 reply_pop_up_alert = notmine
                 await event.answer(reply_pop_up_alert, cache_time=0)
         except BaseException:
-            halps = "Do .help {} to get the list of commands.".format(plugin_name)
+            halps = f"Do .help {plugin_name} to get the list of commands."
             await event.edit(halps)
 
 
@@ -451,9 +452,11 @@ def paginate_help(page_number, loaded_plugins, prefix):
     modules = [
         Button.inline(
             "{} {} {}".format(
-                random.choice(list(multi)), x, random.choice(list(mult2i))
+                random.choice(list(multi)),
+                x,
+                random.choice(list(mult2i)),
             ),
-            data="us_plugin_{}".format(x),
+            data=f"us_plugin_{x}",
         )
         for x in helpable_plugins
     ]
@@ -468,13 +471,15 @@ def paginate_help(page_number, loaded_plugins, prefix):
         ] + [
             (
                 Button.inline(
-                    "<- Pʀᴇᴠɪᴏᴜs", data="{}_prev({})".format(prefix, modulo_page)
+                    "<- Pʀᴇᴠɪᴏᴜs",
+                    data=f"{prefix}_prev({modulo_page})",
                 ),
                 Button.inline("-Bᴀᴄᴋ-", data="open"),
                 Button.inline(
-                    "Nᴇxᴛ ->", data="{}_next({})".format(prefix, modulo_page)
+                    "Nᴇxᴛ ->",
+                    data=f"{prefix}_next({modulo_page})",
                 ),
-            )
+            ),
         ]
     else:
         pairs = pairs[
@@ -501,9 +506,11 @@ def paginate_addon(page_number, loaded_plugins, prefix):
     modules = [
         Button.inline(
             "{} {} {}".format(
-                random.choice(list(multi)), x, random.choice(list(mult2i))
+                random.choice(list(multi)),
+                x,
+                random.choice(list(mult2i)),
             ),
-            data="add_plugin_{}".format(x),
+            data=f"add_plugin_{x}",
         )
         for x in helpable_plugins
     ]
@@ -518,13 +525,15 @@ def paginate_addon(page_number, loaded_plugins, prefix):
         ] + [
             (
                 Button.inline(
-                    "<- Pʀᴇᴠɪᴏᴜs", data="{}_prev({})".format(prefix, modulo_page)
+                    "<- Pʀᴇᴠɪᴏᴜs",
+                    data=f"{prefix}_prev({modulo_page})",
                 ),
                 Button.inline("-Bᴀᴄᴋ-", data="open"),
                 Button.inline(
-                    "Nᴇxᴛ ->", data="{}_next({})".format(prefix, modulo_page)
+                    "Nᴇxᴛ ->",
+                    data=f"{prefix}_next({modulo_page})",
                 ),
-            )
+            ),
         ]
     else:
         pairs = pairs[

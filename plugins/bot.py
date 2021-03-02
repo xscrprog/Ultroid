@@ -66,7 +66,7 @@ except BaseException:
 )
 async def lol(ult):
     pic = udB.get("ALIVE_PIC")
-    uptime = grt((time.time() - start_time))
+    uptime = grt(time.time() - start_time)
     header = udB.get("ALIVE_TEXT") if udB.get("ALIVE_TEXT") else "Hey,  I am alive."
     als = """
 **The Ultroid Userbot...**
@@ -111,7 +111,7 @@ async def _(event):
         return
     end = dt.now()
     ms = (end - start).microseconds / 1000
-    uptime = grt((time.time() - start_time))
+    uptime = grt(time.time() - start_time)
     await x.edit(f"**Pong !!** `{ms}ms`\n**Uptime** - `{uptime}`")
 
 
@@ -176,7 +176,7 @@ async def dyno_usage(dyno):
     r = requests.get(heroku_api + path, headers=headers)
     if r.status_code != 200:
         return await dyno.edit(
-            "`Error: something bad happened`\n\n" f">.`{r.reason}`\n"
+            "`Error: something bad happened`\n\n" f">.`{r.reason}`\n",
         )
     result = r.json()
     quota = result["account_quota"]
@@ -227,7 +227,7 @@ async def dyno_usage(dyno):
     pattern="shutdown$",
 )
 async def shht(event):
-    await eor(event, "GoodBye {}.\n`Shutting down...`".format(OWNER_NAME))
+    await eor(event, f"GoodBye {OWNER_NAME}.\n`Shutting down...`")
     await ultroid_bot.disconnect()
 
 

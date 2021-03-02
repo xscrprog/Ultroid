@@ -10,7 +10,7 @@
 
 • `{i}rename <file name with extension>`
     rename the file
-    
+
 • `{i}mtoi <reply to media>`
     media to image conversion
 
@@ -18,9 +18,11 @@
     convert media to sticker.
 """
 
-import cv2
 import os
+
+import cv2
 from PIL import Image
+
 from . import *
 
 

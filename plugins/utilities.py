@@ -59,23 +59,23 @@ import sys
 import time
 import traceback
 from datetime import datetime as dt
-from telethon.tl.types import InputMediaPoll, Poll, PollAnswer
+
 import pytz
 import requests
 from telegraph import Telegraph
 from telegraph import upload_file as uf
 from telethon import functions
+from telethon.errors.rpcerrorlist import BotInlineDisabledError
+from telethon.errors.rpcerrorlist import BotMethodInvalidError as bmi
 from telethon.errors.rpcerrorlist import (
-    BotInlineDisabledError,
-    ChatSendInlineForbiddenError,
     BotResponseTimeoutError,
-    BotMethodInvalidError as bmi,
+    ChatSendInlineForbiddenError,
 )
 from telethon.events import NewMessage
 from telethon.tl.custom import Dialog
 from telethon.tl.functions.channels import LeaveChannelRequest
 from telethon.tl.functions.photos import GetUserPhotosRequest
-from telethon.tl.types import Channel, Chat, User
+from telethon.tl.types import Channel, Chat, InputMediaPoll, Poll, PollAnswer, User
 from telethon.utils import get_input_location
 
 # =================================================================#
@@ -151,7 +151,8 @@ async def _(event):
 **SOLUTION**:
 `{}`
 """.format(
-        cmd, evaluation
+        cmd,
+        evaluation,
     )
     await x.edit(final_output)
 
@@ -322,7 +323,7 @@ async def _(event):
         await xx.edit(reply_text)
     except bmi:
         await xx.edit(
-            f"**Inline Not Available as You Are in Bot Mode\nPasted to Nekobin :**\n{reply_text}"
+            f"**Inline Not Available as You Are in Bot Mode\nPasted to Nekobin :**\n{reply_text}",
         )
 
 
@@ -356,7 +357,7 @@ async def _(event):
     url = "https://hastebin.com/documents"
     r = requests.post(url, data=message).json()
     url = f"https://hastebin.com/{r['key']}"
-    await xx.edit("**Pasted to Hastebin** : [Link]({})".format(url))
+    await xx.edit(f"**Pasted to Hastebin** : [Link]({url})")
 
 
 @ultroid_cmd(
@@ -370,8 +371,11 @@ async def _(event):
         return False
     replied_user_profile_photos = await event.client(
         GetUserPhotosRequest(
-            user_id=replied_user.user.id, offset=42, max_id=0, limit=80
-        )
+            user_id=replied_user.user.id,
+            offset=42,
+            max_id=0,
+            limit=80,
+        ),
     )
     replied_user_profile_photos_count = "NaN"
     try:
@@ -447,8 +451,10 @@ async def _(ult):
             try:
                 await ultroid_bot(
                     functions.messages.AddChatUserRequest(
-                        chat_id=ult.chat_id, user_id=user_id, fwd_limit=1000000
-                    )
+                        chat_id=ult.chat_id,
+                        user_id=user_id,
+                        fwd_limit=1000000,
+                    ),
                 )
                 await xx.edit(f"Successfully invited `{user_id}` to `{ult.chat_id}`")
             except Exception as e:
@@ -458,8 +464,9 @@ async def _(ult):
             try:
                 await ultroid_bot(
                     functions.channels.InviteToChannelRequest(
-                        channel=ult.chat_id, users=[user_id]
-                    )
+                        channel=ult.chat_id,
+                        users=[user_id],
+                    ),
                 )
                 await xx.edit(f"Successfully invited `{user_id}` to `{ult.chat_id}`")
             except Exception as e:
@@ -483,7 +490,8 @@ async def rmbg(event):
         reply_message = await event.get_reply_message()
         try:
             dl_file = await ultroid_bot.download_media(
-                reply_message, TMP_DOWNLOAD_DIRECTORY
+                reply_message,
+                TMP_DOWNLOAD_DIRECTORY,
             )
         except Exception as e:
             return await xx.edit("**ERROR:**\n`{}`".format(str(e)))
@@ -496,7 +504,7 @@ async def rmbg(event):
         output_file_name = ReTrieveURL(input_str)
     else:
         await xx.edit(
-            f"Use `{Var.HNDLR}rmbg` as reply to a pic to remove its background."
+            f"Use `{Var.HNDLR}rmbg` as reply to a pic to remove its background.",
         )
         await asyncio.sleep(5)
         await xx.delete()
@@ -517,7 +525,7 @@ async def rmbg(event):
     else:
         await xx.edit(
             "RemoveBG returned an error - \n`{}`".format(
-                output_file_name.content.decode("UTF-8")
+                output_file_name.content.decode("UTF-8"),
             ),
         )
 
@@ -542,7 +550,7 @@ async def telegraphcmd(event):
             await xx.edit(amsg)
         elif getmsg.document:
             getit = await ultroid_bot.download_media(getmsg)
-            ab = open(getit, "r")
+            ab = open(getit)
             cd = ab.read()
             ab.close()
             if input_str:
@@ -605,18 +613,22 @@ async def sugg(event):
                         id=12345,
                         question="Do you agree to the replied suggestion?",
                         answers=[PollAnswer("Yes", b"1"), PollAnswer("No", b"2")],
-                    )
+                    ),
                 ),
                 reply_to=msgid,
             )
         except Exception as e:
             return await eod(
-                event, f"`Oops, you can't send polls here!\n\n{str(e)}`", time=5
+                event,
+                f"`Oops, you can't send polls here!\n\n{str(e)}`",
+                time=5,
             )
         await event.delete()
     else:
         return await eod(
-            event, "`Please reply to a message to make a suggestion poll!`", time=5
+            event,
+            "`Please reply to a message to make a suggestion poll!`",
+            time=5,
         )
 
 

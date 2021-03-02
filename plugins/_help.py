@@ -23,7 +23,7 @@ async def ult(ult):
     if plug:
         try:
             if plug in HELP:
-                output = "**Plugin** - `{}`\n".format(plug)
+                output = f"**Plugin** - `{plug}`\n"
                 for i in HELP[plug]:
                     output += i
                 output += "\n© @TheUltroid"
@@ -50,12 +50,13 @@ async def ult(ult):
             return await eor(
                 ult,
                 "`The bot did not respond to the inline query.\nConsider using {}restart`".format(
-                    Var.HNDLR
+                    Var.HNDLR,
                 ),
             )
         except dis:
             return await eor(
-                ult, "`Please turn on inline mode for your bot from` @Botfather."
+                ult,
+                "`Please turn on inline mode for your bot from` @Botfather.",
             )
         except bmi:
             return await eor(

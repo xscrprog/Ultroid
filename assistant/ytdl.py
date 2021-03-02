@@ -65,14 +65,18 @@ async def _(event):
                     ],
                     [
                         Button.switch_inline(
-                            "Sᴇᴀʀᴄʜ Aɢᴀɪɴ", query="yt ", same_peer=True
+                            "Sᴇᴀʀᴄʜ Aɢᴀɪɴ",
+                            query="yt ",
+                            same_peer=True,
                         ),
                         Button.switch_inline(
-                            "Sʜᴀʀᴇ", query=f"yt {string}", same_peer=False
+                            "Sʜᴀʀᴇ",
+                            query=f"yt {string}",
+                            same_peer=False,
                         ),
                     ],
                 ],
-            )
+            ),
         )
     await event.answer(results)
 
@@ -95,7 +99,7 @@ async def _(sur):
                 "key": "FFmpegExtractAudio",
                 "preferredcodec": "mp3",
                 "preferredquality": "320",
-            }
+            },
         ],
         "outtmpl": "%(id)s.mp3",
         "quiet": True,
@@ -125,7 +129,7 @@ async def _(sur):
         await sur.edit(
             f"`Preparing to upload song:`\
         \n**{ytdl_data['title']}**\
-        \nby *{ytdl_data['uploader']}*"
+        \nby *{ytdl_data['uploader']}*",
         )
         await asst.send_file(
             getter,
@@ -138,10 +142,10 @@ async def _(sur):
                     duration=int(ytdl_data["duration"]),
                     title=str(ytdl_data["title"]),
                     performer=str(ytdl_data["uploader"]),
-                )
+                ),
             ],
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, sur, c_time, "Uploading..", f"{ytdl_data['title']}.mp3")
+                progress(d, t, sur, c_time, "Uploading..", f"{ytdl_data['title']}.mp3"),
             ),
         )
         os.system(f"rm {ytdl_data['id']}.mp*")
@@ -179,7 +183,7 @@ async def _(fuk):
         await fuk.edit(
             f"`Preparing to upload video:`\
         \n**{ytdl_data['title']}**\
-        \nby *{ytdl_data['uploader']}*"
+        \nby *{ytdl_data['uploader']}*",
         )
         await asst.send_file(
             getter,
@@ -188,7 +192,7 @@ async def _(fuk):
             caption=f"**{ytdl_data['title']}\n{convert(ytdl_data['duration'])}\n{ytdl_data['uploader']}**",
             supports_streaming=True,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, fuk, c_time, "Uploading..", f"{ytdl_data['title']}.mp4")
+                progress(d, t, fuk, c_time, "Uploading..", f"{ytdl_data['title']}.mp4"),
             ),
         )
         os.remove(f"{ytdl_data['id']}.mp4")

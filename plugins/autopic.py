@@ -15,7 +15,9 @@
 import asyncio
 import os
 import random
+
 from telethon import functions
+
 from . import *
 
 
@@ -34,7 +36,8 @@ async def autopic(e):
     page = clls[num]
     title = page["title"]
     a = await eor(
-        e, f" Got a Collection `{title}` related to your search !\nStarting Autopic !!"
+        e,
+        f" Got a Collection `{title}` related to your search !\nStarting Autopic !!",
     )
     while True:
         animepp(page["href"])

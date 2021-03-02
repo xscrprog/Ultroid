@@ -22,7 +22,7 @@ auth_url = r["auth_url"]
 @owner
 async def alvcs(event):
     await event.edit(
-        "Customise your {}alive. Choose from the below options -".format(Var.HNDLR),
+        f"Customise your {Var.HNDLR}alive. Choose from the below options -",
         buttons=[
             [Button.inline("Aʟɪᴠᴇ Tᴇxᴛ", data="alvtx")],
             [Button.inline("Aʟɪᴠᴇ ᴍᴇᴅᴜᴀ", data="alvmed")],
@@ -41,7 +41,7 @@ async def name(event):
     name = "Alive Text"
     async with event.client.conversation(pru) as conv:
         await conv.send_message(
-            "**Alive Text**\nEnter the new alive text.\n\nUse /cancel to terminate the operation."
+            "**Alive Text**\nEnter the new alive text.\n\nUse /cancel to terminate the operation.",
         )
         response = conv.wait_event(events.NewMessage(chats=pru))
         response = await response
@@ -51,7 +51,7 @@ async def name(event):
         else:
             await setit(event, var, themssg)
             await conv.send_message(
-                "{} changed to {}\n\nDo {}restart".format(name, themssg, Var.HNDLR)
+                f"{name} changed to {themssg}\n\nDo {Var.HNDLR}restart",
             )
 
 
@@ -64,7 +64,7 @@ async def media(event):
     name = "Alive Media"
     async with event.client.conversation(pru) as conv:
         await conv.send_message(
-            "**Alive Media**\nSend me a pic/gif/bot api id of sticker to set as alive media.\n\nUse /cancel to terminate the operation."
+            "**Alive Media**\nSend me a pic/gif/bot api id of sticker to set as alive media.\n\nUse /cancel to terminate the operation.",
         )
         response = await conv.get_response()
         try:
@@ -84,7 +84,7 @@ async def media(event):
             except BaseException:
                 return await conv.send_message("Terminated.")
         await setit(event, var, url)
-        await conv.send_message("{} has been set.".format(name))
+        await conv.send_message(f"{name} has been set.")
 
 
 @callback("delmed")
@@ -121,7 +121,7 @@ async def name(event):
     name = "PM Text"
     async with event.client.conversation(pru) as conv:
         await conv.send_message(
-            "**PM Text**\nEnter the new Pmpermit text.\n\nUse /cancel to terminate the operation."
+            "**PM Text**\nEnter the new Pmpermit text.\n\nUse /cancel to terminate the operation.",
         )
         response = conv.wait_event(events.NewMessage(chats=pru))
         response = await response
@@ -131,7 +131,7 @@ async def name(event):
         else:
             await setit(event, var, themssg)
             await conv.send_message(
-                "{} changed to {}\n\nDo {}restart".format(name, themssg, Var.HNDLR)
+                f"{name} changed to {themssg}\n\nDo {Var.HNDLR}restart",
             )
 
 
@@ -144,7 +144,7 @@ async def media(event):
     name = "PM Media"
     async with event.client.conversation(pru) as conv:
         await conv.send_message(
-            "**PM Media**\nSend me a pic/gif/bot api id of sticker to set as pmpermit media.\n\nUse /cancel to terminate the operation."
+            "**PM Media**\nSend me a pic/gif/bot api id of sticker to set as pmpermit media.\n\nUse /cancel to terminate the operation.",
         )
         response = await conv.get_response()
         try:
@@ -164,7 +164,7 @@ async def media(event):
             except BaseException:
                 return await conv.send_message("Terminated.")
         await setit(event, var, url)
-        await conv.send_message("{} has been set.".format(name))
+        await conv.send_message(f"{name} has been set.")
 
 
 @callback("delpmmed")

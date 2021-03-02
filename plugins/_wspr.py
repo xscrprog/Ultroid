@@ -45,12 +45,13 @@ async def _(e):
             return await eor(
                 e,
                 "`The bot did not respond to the inline query.\nConsider using {}restart`".format(
-                    Var.HNDLR
+                    Var.HNDLR,
                 ),
             )
         except dis:
             return await eor(
-                e, "`Please turn on inline mode for your bot from` @Botfather."
+                e,
+                "`Please turn on inline mode for your bot from` @Botfather.",
             )
         await results[0].click(e.chat_id, reply_to=e.reply_to_msg_id, hide_via=True)
         await e.delete()
@@ -101,7 +102,9 @@ async def _(e):
             button = [
                 Button.url("Private", url=f"t.me/{username}"),
                 Button.switch_inline(
-                    "Secret msg", query=f"msg {query} wspr ", same_peer=True
+                    "Secret msg",
+                    query=f"msg {query} wspr ",
+                    same_peer=True,
                 ),
             ]
             sur = e.builder.article(
@@ -134,7 +137,8 @@ async def _(e):
             snap.update({logi.id: desc})
         except ValueError:
             sur = e.builder.article(
-                title="Type ur msg", text=f"You Didn't Type Your Msg"
+                title="Type ur msg",
+                text=f"You Didn't Type Your Msg",
             )
     await e.answer([sur])
 

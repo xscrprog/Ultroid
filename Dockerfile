@@ -5,7 +5,7 @@
 
 FROM ndourbae/ultroid:beta1.0
 
-RUN git clone -b beta https://github.com/xscrprog/Ultroid.git /root/TeamUltroid/
 WORKDIR /root/TeamUltroid/
+RUN git clone -b beta https://github.com/xscrprog/Ultroid.git
 RUN pip install -r requirements.txt
 CMD ["bash", "resources/startup/startup.sh"]

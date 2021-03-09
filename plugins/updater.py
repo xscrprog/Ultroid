@@ -14,7 +14,7 @@ from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
 from . import get_string
 
-UPSTREAM_REPO_URL = "https://github.com/TeamUltroid/Ultroid"
+UPSTREAM_REPO_URL = "https://github.com/xscrprog/Ultroid"
 requirements_path = path.join(
     path.dirname(path.dirname(path.dirname(__file__))), "requirements.txt"
 )
@@ -176,6 +176,6 @@ async def upstream(ups):
             "`Successfully Updated!\nBot is restarting... Wait for a second!`",
         )
         # Spin a new instance of bot
-        args = [sys.executable, "./resources/startup/deploy.sh"]
+        args = [sys.executable, "-m", "pyUltroid"]
         execle(sys.executable, *args, environ)
         return

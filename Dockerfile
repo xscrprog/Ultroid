@@ -3,9 +3,9 @@
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
-FROM ndourbae/ultroid:beta1.0
+FROM ndourbae/ultroid:beta2.0
 
 RUN git clone -b beta https://github.com/xscrprog/Ultroid.git /root/TeamUltroid/
 WORKDIR /root/TeamUltroid/
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 CMD ["bash", "resources/startup/startup.sh"]

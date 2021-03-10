@@ -1,2 +1,1 @@
 py-Ultroid==12.6b0
-gtts
